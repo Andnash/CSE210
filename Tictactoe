@@ -1,0 +1,95 @@
+    # W01 Prove: Developer - Tic Tac Toe
+    # Andrew Nash
+
+        
+def main():
+    player = next_player('')
+    board = make_board()
+    while not (win_conditions(board) or tie_game(board)):
+        show_board(board)
+        player_turn(player, board)
+        player = next_player(player)
+    show_board(board)
+
+    if tie_game(board) == True:
+        print("'Tis a draw.")
+        
+        
+    else:
+        print('Victory!')
+        print()
+        print('*** Epilogue ***')
+        print()
+        print('Though the campaign was long and arduous, after countless bloody bouts, thou hast relinquished thine enemy from the kingdom.')
+        print('Yet... This thine enemy shall never truly be forgotten...')
+        print('For, in so short a time, thy enemy hath teased out emotions of a truly competitive spirit...')
+        print('Thou mayest not fathom such depths this day, yet the future is long and looming...')
+        print('But alas! Such is the game.')
+        print('A tic for a tac! And so shall it continue until one hath tread a path upon the other.')
+        print()
+        print('~ THE END')   
+        print() 
+
+
+
+def make_board():
+    board = []
+    for i in range(9):
+        board.append(i + 1)
+    return board
+
+
+def show_board(board):
+    
+    print()
+    print(f'{board[6]}|{board[7]}|{board[8]}')
+    print('-+-+-')
+    print(f'{board[3]}|{board[4]}|{board[5]}')
+    print('-+-+-')
+    print(f'{board[0]}|{board[1]}|{board[2]}')
+    print()
+        
+
+def tie_game(board):
+    for square in range(9):
+        if board[square] != 'X' and board[square] != 'O':
+            return False
+    
+    return True
+
+
+
+def win_conditions(board):
+
+            # Horizontal Win
+    return (board[6] == board[7] == board[8] or
+            board[3] == board[4] == board[5] or
+            board[0] == board[1] == board[2] or
+
+            # Vertical Win
+            board[6] == board[3] == board[0] or
+            board[7] == board[4] == board[1] or
+            board[8] == board[5] == board[2] or
+            
+            # Diagonal Win
+            board[6] == board[4] == board[2] or
+            board[8] == board[4] == board[0])
+            
+
+
+        
+def player_turn(player, board):
+    square = int(input(f'{player} may place their mark (1 - 9): '))
+    board[square - 1] = player
+
+        
+def next_player(current):
+    if current == '' or current == 'O':
+        return 'X'
+    elif current == 'X':
+        return 'O'        
+        
+        
+        
+if __name__ == '__main__':
+    main()       
